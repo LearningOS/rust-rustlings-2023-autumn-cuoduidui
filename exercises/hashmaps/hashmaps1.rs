@@ -11,18 +11,18 @@
 // Execute `rustlings hint hashmaps1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
-
+// https://doc.rust-lang.org/book/ch08-03-hash-maps.html
 fn fruit_basket() -> HashMap<String, u32> {
-    let mut basket = // TODO: declare your hash map here.
+    let mut basket =HashMap::new(); // TODO: declare your hash map here.
 
     // Two bananas are already given for you :)
     basket.insert(String::from("banana"), 2);
-
+    basket.insert(String::from("banana"), 3);
     // TODO: Put more fruits in your basket here.
-
+    basket.insert(String::from("fruits"), 2);
+    basket.insert(String::from("apple"), 2);
     basket
 }
 
