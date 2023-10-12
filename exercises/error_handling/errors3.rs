@@ -10,8 +10,8 @@
 // I AM NOT DONE
 
 use std::num::ParseIntError;
-
-fn main() {
+// https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#where-the--operator-can-be-used
+fn main() ->Result<(), Box<dyn ParseIntError>>  {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
