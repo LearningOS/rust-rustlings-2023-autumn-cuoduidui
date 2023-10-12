@@ -7,21 +7,25 @@
 // Execute `rustlings hint errors3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::num::ParseIntError;
 // https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#where-the--operator-can-be-used
-fn main() ->Result<(), Box<dyn ParseIntError>>  {
+fn main() {
     let mut tokens = 100;
-    let pretend_user_input = "8";
+    let pretend_user_input = "8a";
 
-    let cost = total_cost(pretend_user_input)?;
-
-    if cost > tokens {
-        println!("You can't afford that many!");
-    } else {
-        tokens -= cost;
-        println!("You now have {} tokens.", tokens);
+    let cost = total_cost(pretend_user_input);
+    
+    match cost{
+        Ok(a)=>{
+            if a > tokens {
+                println!("You can't afford that many!");
+            } else {
+                tokens -= a;
+                println!("You now have {} tokens.", tokens);
+            }
+        },
+        Err(e)=>{println!("ParseIntError {}",e.to_string());}
     }
 }
 
