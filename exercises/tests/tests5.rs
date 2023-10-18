@@ -22,7 +22,6 @@
 // Execute `rustlings hint tests5` or use the `hint` watch subcommand for a
 // hint.
 
-
 /// # Safety
 ///
 /// The `address` must contain a mutable reference to a valid `u32` value.
@@ -30,9 +29,13 @@ unsafe fn modify_by_address(mut address: usize) {
     // TODO: Fill your safety notice of the code block below to match your
     // code's behavior and the contract of this function. You may use the
     // comment of the test below as your format reference.
+    
+// https://kaisery.github.io/trpl-zh-cn/ch19-01-unsafe-rust.html
     unsafe {
         // todo!("Your code goes here")
-         
+       let mut vec_ptr: *mut  u32 = address as *mut u32;
+    //    vec_ptr=123 as i32;
+       *vec_ptr= 0xAABBCCDD;
     }
 }
 
@@ -46,6 +49,6 @@ mod tests {
         // SAFETY: The address is guaranteed to be valid and contains
         // a unique reference to a `u32` local variable.
         unsafe { modify_by_address(&mut t as *mut u32 as usize) };
-        assert!(0xAABBCCDD == 0xAABBCCDD);
+        assert!(t == 0xAABBCCDD);
     }
 }
