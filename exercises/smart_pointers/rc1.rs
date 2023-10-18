@@ -10,7 +10,6 @@
 //
 // Execute `rustlings hint rc1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 use std::rc::Rc;
 
@@ -34,7 +33,7 @@ impl Planet {
         println!("Hi from {:?}!", self)
     }
 }
-
+// https://www.rustwiki.org.cn/zh-CN/book/ch15-04-rc.html#%E5%85%8B%E9%9A%86-rct-%E4%BC%9A%E5%A2%9E%E5%8A%A0%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0
 fn main() {
     let sun = Rc::new(Sun {});
     println!("reference count = {}", Rc::strong_count(&sun)); // 1 reference
@@ -60,17 +59,17 @@ fn main() {
     jupiter.details();
 
     // TODO
-    let saturn = Planet::Saturn(Rc::new(Sun {}));
+    let saturn = Planet::Saturn(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 7 references
     saturn.details();
 
     // TODO
-    let uranus = Planet::Uranus(Rc::new(Sun {}));
+    let uranus = Planet::Uranus(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 8 references
     uranus.details();
 
     // TODO
-    let neptune = Planet::Neptune(Rc::new(Sun {}));
+    let neptune = Planet::Neptune(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 9 references
     neptune.details();
 
@@ -92,12 +91,15 @@ fn main() {
     println!("reference count = {}", Rc::strong_count(&sun)); // 4 references
 
     // TODO
+    drop(earth);
     println!("reference count = {}", Rc::strong_count(&sun)); // 3 references
 
     // TODO
+    drop(venus);
     println!("reference count = {}", Rc::strong_count(&sun)); // 2 references
 
     // TODO
+    drop(mercury);
     println!("reference count = {}", Rc::strong_count(&sun)); // 1 reference
 
     assert_eq!(Rc::strong_count(&sun), 1);
